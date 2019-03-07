@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
-import convert from 'convert-units';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import './estilos.css';
 import Location from './Location';
 import WeatherData from './WeatherData';
-import { SUN } from './../../constants/weathers';
+import transformWeather from '../../services/transformWeather';
+import { api_weather } from './../../constants/api_url';
 
-const location = "Bilbao,ES";
-const api_key = "77e35e00e8e2c24e7f11c96663bd7e1a";
-const url_base_weather = "http://api.openweathermap.org/data/2.5/weather";
-const api_weather = `${url_base_weather})q=${location}&appid=${api_key}`;
-
-const data = {
-    temperature: 5,
-    weatherState: SUN,
-    humidity: 10,
-    wind: '10 m/s'
-}
 // esto es lo que se va a renderizar
 class WeatherLocation extends Component {
 
@@ -23,53 +13,54 @@ class WeatherLocation extends Component {
         super();
         this.state = {
             city: 'Bilbao',
-            data: data,
+            data: null,
         };
+        console.log("constructor");
     }
 
-    //Metodo que hace la conversion de grados k a grados c
-    getTemp = kelvin =>{
-        return Number(convert(kelvin).from("K").to("C").toFixed(2));
+    componentDidMount() {
+        console.log("componentDidMount");
+        this.hadleUpdateClick();
     }
-    getWeatherState = weather_data =>{
-        return SUN
+    componentDidUpdate(prevProps, prevState) {
+        console.log("componentDidUpdate");
     }
-    getData = weather_data => {
-        const{ humidity, temp } = weather_data.main;
-        const {speed} =weather_data.wind;
-        const weatherState = this.getWeatherState(weather_data);
-        const temperature = this.getTemp(temp);
-        const data ={
-            humidity,
-            temperature:temp,
-            weatherState,
-            wind : `${speed} m/s`
-        }
-        return data;
+    /*Se eliminaran en la version 17
+    componentWillMount() {
+        console.log("UNSAFE componentWillMount");
     }
+    componentWillUpdate(nextProps, nextState) {
+        console.log("UNSAFE componentWillUpdate");
+    */
+    
+
+
     hadleUpdateClick = () => {
         fetch(api_weather).then(resolve => {
             return resolve.json();
         }).then(data => {
-            const newWeather = this.getData(data);
+            console.log("Resultado del hadleUpdateClick ")
+            const newWeather = transformWeather(data);
             console.log(newWeather);
             debugger;
             this.setState({
-                data:newWeather
+                data: newWeather
             });
 
+        }).catch(error=>{
+            console.log("esto ha cascado");
         });
     }
 
     //Metodo que printa el contenido del componente,printa lo que hay dentro del render
     render() {
+        console.log(" render");
         //Destructuring
-        //const {city,data} =this.state;
+        const {city,data} =this.state;
         return (
             <div className="weatherLocationCont">
-                <Location city={this.state.city}></Location>
-                <WeatherData data={this.state.data}></WeatherData>
-                <button onClick={this.hadleUpdateClick}>Actualizar</button>
+                <Location city={city}></Location>
+                {data ?<WeatherData data={data}></WeatherData> :<CircularProgress></CircularProgress>}
             </div>
         );
     }
