@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import convert from 'convert-units';
 import './estilos.css';
 import Location from './Location';
 import WeatherData from './WeatherData';
@@ -26,6 +27,10 @@ class WeatherLocation extends Component {
         };
     }
 
+    //Metodo que hace la conversion de grados k a grados c
+    getTemp = kelvin =>{
+        return Number(convert(kelvin).from("K").to("C").toFixed(2));
+    }
     getWeatherState = weather_data =>{
         return SUN
     }
@@ -33,7 +38,7 @@ class WeatherLocation extends Component {
         const{ humidity, temp } = weather_data.main;
         const {speed} =weather_data.wind;
         const weatherState = this.getWeatherState(weather_data);
-
+        const temperature = this.getTemp(temp);
         const data ={
             humidity,
             temperature:temp,
