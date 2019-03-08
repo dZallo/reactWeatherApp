@@ -10,12 +10,16 @@ const cities=[
 
 ];
 class App extends Component {
+  handleSelectionLocation = city =>{
+    console.log("handleSelectionLocation App ");
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <h1>WEATHER APP</h1>
-          <LocationList cities={cities}></LocationList>
+          <LocationList cities={cities} onSelectedLocation={this.handleSelectionLocation}></LocationList>
         </header>
       </div>
     );

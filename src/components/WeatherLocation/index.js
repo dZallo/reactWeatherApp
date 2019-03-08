@@ -57,11 +57,13 @@ class WeatherLocation extends Component {
 
     //Metodo que printa el contenido del componente,printa lo que hay dentro del render
     render() {
+
         console.log(" render");
         //Destructuring
         const { city, data } = this.state;
+        const {onWeatherLocationClick} =this.props;
         return (
-            <div className="weatherLocationCont">
+            <div className="weatherLocationCont" onClick={onWeatherLocationClick}>
                 <Location city={city}></Location>
                 {data ? <WeatherData data={data}></WeatherData> : <CircularProgress size={50}></CircularProgress>}
             </div>
@@ -69,7 +71,8 @@ class WeatherLocation extends Component {
     }
 }
 WeatherLocation.propTypes = {
-    city: PropTypes.string.isRequired
+    city: PropTypes.string.isRequired,
+    onWeatherLocationClick: PropTypes.func,
 }
 // Esto hace que se pueda acceder al componente desde cualquier parte de la app pero haciendo el import
 // del componente de WeatherLocation
