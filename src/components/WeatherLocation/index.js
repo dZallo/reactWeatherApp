@@ -32,7 +32,7 @@ class WeatherLocation extends Component {
     componentWillUpdate(nextProps, nextState) {
         console.log("UNSAFE componentWillUpdate");
     */
-    
+
 
 
     hadleUpdateClick = () => {
@@ -47,7 +47,7 @@ class WeatherLocation extends Component {
                 data: newWeather
             });
 
-        }).catch(error=>{
+        }).catch(error => {
             console.log("esto ha cascado");
         });
     }
@@ -56,11 +56,11 @@ class WeatherLocation extends Component {
     render() {
         console.log(" render");
         //Destructuring
-        const {city,data} =this.state;
+        const { city, data } = this.state;
         return (
             <div className="weatherLocationCont">
                 <Location city={city}></Location>
-                {data ?<WeatherData data={data}></WeatherData> :<CircularProgress></CircularProgress>}
+                {data ? <WeatherData data={data}></WeatherData> : <CircularProgress size={50}></CircularProgress>}
             </div>
         );
     }
