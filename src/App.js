@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import WeatherLocation from './components/WeatherLocation';
+import LocationList from './components/LocationList';
 import './App.css';
+
 
 class App extends Component {
   render() {
@@ -8,7 +9,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1>WEATHER APP</h1>
-          <WeatherLocation city="Bilbao,ES"></WeatherLocation>
+          <LocationList></LocationList>
         </header>
       </div>
     );
