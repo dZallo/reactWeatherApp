@@ -11,7 +11,7 @@ const cities=[
 ];
 class App extends Component {
   handleSelectionLocation = city =>{
-    console.log("handleSelectionLocation App ");
+    console.log("handleSelectionLocation App " + city);
   }
 
   render() {
