@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import PropTypes from 'prop-types';
+import getUrlWeatherByCity from './../../services/getURlWeatherByCity'; 
 import './estilos.css';
 import Location from './Location';
 import WeatherData from './WeatherData';
 import transformWeather from '../../services/transformWeather';
-import { api_weather } from './../../constants/api_url';
 
 // esto es lo que se va a renderizar
 class WeatherLocation extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        const {city} =props;
         this.state = {
-            city: 'Bilbao',
+            city: city,
             data: null,
         };
         console.log("constructor");
@@ -36,13 +38,14 @@ class WeatherLocation extends Component {
 
 
     hadleUpdateClick = () => {
+        const api_weather = getUrlWeatherByCity(this.state.city);
         fetch(api_weather).then(resolve => {
             return resolve.json();
         }).then(data => {
             console.log("Resultado del hadleUpdateClick ")
             const newWeather = transformWeather(data);
             console.log(newWeather);
-            debugger;
+            //debugger;
             this.setState({
                 data: newWeather
             });
@@ -64,6 +67,9 @@ class WeatherLocation extends Component {
             </div>
         );
     }
+}
+WeatherLocation.propTypes = {
+    city: PropTypes.string.isRequired
 }
 // Esto hace que se pueda acceder al componente desde cualquier parte de la app pero haciendo el import
 // del componente de WeatherLocation
