@@ -18,35 +18,42 @@ class App extends Component {
 
   render() {
     return (
+
+
+      <div className="App">
+        <header className="App-header">
+          <h1>WEATHER APP</h1>
+          <LocationList cities={cities} onSelectedLocation={this.handleSelectionLocation}></LocationList>
+        </header>
+      </div>
+
+      /*
       <MuiThemeProvider>
         <Grid fluid>
-          <Row>
-            <Col xs={12} sm={6} md={4} lg={3}>
+        <Row>
+          <h1>Grid System:xs,sm,md,lg</h1>
+        </Row>
+        <Row>
+          <h5>Las columnas se muestran en la misma fila mientras sumen 12</h5>
+        </Row>
+          <Row around ="xs">
+            <Col xs={2}>
               <div className="red">MD</div>
             </Col>
-            <Col xs={12} sm={6} md={4} lg={3}>
+            <Col xs={2}>
               <div className="green">MD</div>
             </Col>
-            <Col xs={12} sm={6} md={4} lg={3}>
+            <Col xs={2}>
               <div className="blue">MD</div>
             </Col>
-            <Col xs={12} sm={6} md={4} lg={3}>
+            <Col xs={2}>
               <div className="yellow">MD</div>
             </Col>
           </Row>
           </Grid>
 
       </MuiThemeProvider>
-
-
-
-      /*<div className="App">
-        <header className="App-header">
-          <h1>WEATHER APP</h1>
-          <LocationList cities={cities} onSelectedLocation={this.handleSelectionLocation}></LocationList>
-        </header>
-      </div>
-      */
+            */
     );
   }
 }
