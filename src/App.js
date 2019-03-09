@@ -20,12 +20,17 @@ class App extends Component {
     return (
 
 
-      <div className="App">
-        <header className="App-header">
-          <h1>WEATHER APP</h1>
-          <LocationList cities={cities} onSelectedLocation={this.handleSelectionLocation}></LocationList>
-        </header>
-      </div>
+      <Grid>
+        <Row>App Weather</Row>
+        <Row>
+          <Col xs={12} md={6}>
+            <LocationList cities={cities} onSelectedLocation={this.handleSelectionLocation}></LocationList>
+          </Col>
+          <Col xs={12} md={6}>
+            <div className="details"></div>
+          </Col>
+        </Row>
+      </Grid>
 
       /*
       <MuiThemeProvider>
