@@ -6,7 +6,6 @@ import Toolbar from '@material-ui/core/Toolbar';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import LocationList from './components/LocationList';
 import './App.css';
-import { MuiThemeProvider } from '@material-ui/core';
 
 const cities = [
   'Bilbao,ES',
