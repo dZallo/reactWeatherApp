@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import LocationList from './components/LocationList';
+import ForecastExtended from './components/ForecastExtended';
 import './App.css';
 
 const cities = [
@@ -12,14 +13,25 @@ const cities = [
   'Madrid,ES',
   'London,UK',
   'Buenos Aires, ar'
-
 ];
 class App extends Component {
+
+  constructor() {
+    super();
+    //Solo se puede hacer state igual a  algo en el constructor
+    //En todos los demas sitios se deberia usar el setState()
+    this.state = { city: null };
+
+  }
+
   handleSelectionLocation = city => {
-    console.log("handleSelectionLocation App " + city);
+    //Se añade la ciudad seleccionada a la constante city
+    this.setState({ city: city });
+    //console.log("handleSelectionLocation App " + city);
   }
 
   render() {
+    const { city } = this.state;
     return (
       <Grid>
         <Row>
@@ -36,15 +48,20 @@ class App extends Component {
             <LocationList cities={cities} onSelectedLocation={this.handleSelectionLocation}></LocationList>
           </Col>
           <Col xs={12} md={6}>
-          <Paper elevation={4}>
-          <div className="details"></div>
-          </Paper>
-            
+            <Paper elevation={4}>
+              <div className="details">
+                {city && <ForecastExtended city={city}></ForecastExtended> }
+              </div>
+            </Paper>
+
           </Col>
         </Row>
       </Grid>
 
       /*
+      // la dos formas son validas
+      {city  ?<ForecastExtended city={city}></ForecastExtended> :<h1>No se ha seleccionado una ciudad</h1>}
+      {city && <ForecastExtended city={city}></ForecastExtended> }
       <MuiThemeProvider>
         <Grid fluid>
         <Row>

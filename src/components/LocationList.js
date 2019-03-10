@@ -8,7 +8,7 @@ const LocationList = ({ cities, onSelectedLocation }) => {
         console.log("handleWeatherLocationClick");
         onSelectedLocation(city);
     }
-    console.log(cities);
+    //console.log(cities);
     const strToComponents = (cities) => (
         cities.map((city, index) =>
             <WeatherLocation
