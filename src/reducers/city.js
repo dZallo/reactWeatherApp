@@ -1,13 +1,16 @@
 import { SET_CITY } from './../actions';
 //state estado de la app
-export const city = (state, action) => {
+//state ={} hace que por defecto se ponga el estado vacio
+export const city = (state = {}, action) => {
     switch (action.type) {
         case SET_CITY:
-            return { ...state, city: action.value }
+            /*
+                el ...state, hace que si no tiene esa propiedad definina la meta como una nueva.
+                En caso de tenerla definida la modificaria
+            */
+            return { ...state, city: action.payload }
 
         default:
-            break;
+            return state;
     }
-
-    return state;
 }
