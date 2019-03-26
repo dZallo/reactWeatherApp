@@ -8,6 +8,7 @@ const initialState = {
 
 
 // Sirve para que la extension de redux tools detecte el store
+//window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 export const store = createStore(city, initialState,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
