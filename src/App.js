@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { createStore } from 'redux';
+import {connect} from 'react-redux';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
+import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import LocationList from './components/LocationList';
 import ForecastExtended from './components/ForecastExtended';
+import { setCity } from './actions/index';
 import './App.css';
 
 const cities = [
@@ -15,9 +17,8 @@ const cities = [
   'London,UK',
   'Buenos Aires, ar'
 ];
-const store = createStore(() => { },
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
-  // Sirve para que la extension de redux tools detecte el store
+
+
 class App extends Component {
 
   constructor() {
@@ -33,9 +34,8 @@ class App extends Component {
     this.setState({ city: city });
     //console.log("handleSelectionLocation App " + city);
 
-    //Se define el action y luego se ejecuta en el store
-    const action = { type: 'setCity', value: city };
-    store.dispatch(action)
+    //En props está el store
+    this.props.setCity(city);
 
   }
 
@@ -100,5 +100,14 @@ class App extends Component {
     );
   }
 }
+App.propTypes ={
+  setCity:PropTypes.func.isRequired,
+}
 
-export default App;
+
+const mapDispatchToProps = dispatch=>({
+  setCity: value => dispatch(setCity(value))
+});
+const AppConected = connect(null,mapDispatchToProps)(App);
+// export default connect(null,mapDispatchToProps)(App);
+export default AppConected;
