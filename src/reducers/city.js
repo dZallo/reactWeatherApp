@@ -4,11 +4,12 @@ import { SET_CITY } from './../actions';
 export const city = (state = {}, action) => {
     switch (action.type) {
         case SET_CITY:
+      
             /*
                 el ...state, hace que si no tiene esa propiedad definina la meta como una nueva.
                 En caso de tenerla definida la modificaria
             */
-            return { ...state, city: action.payload }
+            return action.payload;
 
         default:
             return state;
